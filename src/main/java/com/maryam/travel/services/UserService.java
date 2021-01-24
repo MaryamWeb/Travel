@@ -1,7 +1,5 @@
 package com.maryam.travel.services;
 
-package com.maryam.ideas.services;
-
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -27,14 +25,14 @@ public class UserService {
 		return potentialUser.isPresent() ? potentialUser.get() : null;
 	}
 	
-	public User findOne(String email) {
-		Optional<User> potentialUser = userRepo.findByEmail(email);
+	public User findOne(String username) {
+		Optional<User> potentialUser = userRepo.findByUsername(username);
 		return potentialUser.isPresent() ? potentialUser.get() : null;
 	}
 	
 	public User register(User newUser, BindingResult result) {
-		if(findOne(newUser.getEmail()) != null) {
-			result.rejectValue("email", "Unique", "This email is already in use!");
+		if(findOne(newUser.getUsername()) != null) {
+			result.rejectValue("username", "Unique", "This username is already in use!");
 		}
 		if(!newUser.getPassword().equals(newUser.getConfirm())) {
 			result.rejectValue("confirm", "Matches", "The Confirm Password must match Password!");
@@ -42,7 +40,7 @@ public class UserService {
 		if(result.hasErrors()) {
 			return null;
 		} else {
-			String hashed = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt()); //hash password
+			String hashed = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt()); 
 			newUser.setPassword(hashed);
 			return userRepo.save(newUser);
 		}
@@ -51,9 +49,9 @@ public class UserService {
 		if(result.hasErrors()) {
 			return null;
 		}
-		User user = findOne(newLogin.getEmail());
+		User user = findOne(newLogin.getUsername());
 		if(user == null) {
-			result.rejectValue("email", "Unique", "Sorry. This email does not exist in our database");
+			result.rejectValue("username", "Unique", "Sorry. This username does not exist in our database");
 			return null;
 		}
 		if(!BCrypt.checkpw(newLogin.getPassword(), user.getPassword())) {
