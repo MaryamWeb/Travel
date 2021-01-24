@@ -29,7 +29,7 @@
 	      </ul>
       </c:if>
 	</nav>
-	<div class="container bg-white mt-5" test>
+	<div class="container bg-white mt-5">
 	    <div class="row no-gutter">
 	       <div class="col-md-8 d-none d-md-flex bg-image"></div>
 	       <div class="login-right-container col-md-4 d-flex align-items-center">
@@ -45,7 +45,7 @@
 	                    	<form:errors path="password" class="text-danger" />
 	                    </div>
 	                    <input type='submit' value='Login' class="btn btn-block main-bg-color mb-3 input-field shadow-sm"/> 
-	                    <p>OR <a href=" " class="link-text muted-color">Create An Account</a></p>
+	                    <p>OR <a href="/register" class="link-text muted-color">Create An Account</a></p>
 	                </form:form>
 	            </div>
 	       </div>
