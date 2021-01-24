@@ -17,11 +17,11 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg main-color px-5">
-	  <span class="navbar-brand mb-0 h1"><i class="fas fa-home"></i></span>
-	  <c:if test="${not empty user}">
+	  <a class="main-color navbar-brand mb-0 h1" href="/"><i class="fas fa-home"></i></a>
+	  <c:if test="${not empty currentUser}">
 		   <ul class="navbar-nav  ml-auto">
 			  <li class="nav-item">
-			  	<a class="nav-link main-color" href="/ideas">${user.username}</a>
+			  	<a class="nav-link main-color" href="/dashboard/${currentUser.id}">${currentUser.username}</a>
 			  </li>
 		      <li class="nav-item">
 		        <a class="nav-link main-color" href="/logout">Logout</a>
@@ -32,10 +32,12 @@
  <div class="container emp-profile bg-white pt-4">
       <div class="row">
           <div class="col-md-4 avatar">
-               <img src="${theUser.profileImg}" alt="Avatar"/>
+              <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1093&q=80" alt="Avatar"/>
           </div>
           <div class="col-md-8">
-              <a href="/dashboard/user/edit" class="btn main-bg-color float-right">Edit Profile</a>  
+          <c:if test="${currentUser.id == theUser.id}">
+			<a href="/dashboard/user/edit" class="btn main-bg-color float-right">Edit Profile</a> 
+		 </c:if>
               <div class="dashboard-header">
                <h5>${theUser.username}</h5>
                <h6>${theUser.firstName} ${theUser.lastName}</h5>

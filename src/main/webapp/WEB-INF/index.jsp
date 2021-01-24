@@ -17,16 +17,17 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg main-color px-5">
-	  <span class="navbar-brand mb-0 h1"><i class="fas fa-home"></i></span>
-	   <ul class="navbar-nav  ml-auto">
-		  <li class="nav-item">
-		  	<a class="nav-link main-color" href="/login">login</a>
-		  </li>
-	      <li class="nav-item">
-	        <a class="nav-link main-color" href="/logout">Logout</a>
-	      </li>
-      </ul>
+	  <a class="main-color navbar-brand mb-0 h1" href="/"><i class="fas fa-home"></i></a>
+	  <c:if test="${not empty currentUser}">
+		   <ul class="navbar-nav  ml-auto">
+			  <li class="nav-item">
+			  	<a class="nav-link main-color" href="/dashboard/${currentUser.id}">${currentUser.username}</a>
+			  </li>
+		      <li class="nav-item">
+		        <a class="nav-link main-color" href="/logout">Logout</a>
+		      </li>
+	      </ul>
+      </c:if>
 	</nav>
-	 
 </body>
 </html>

@@ -17,11 +17,11 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg main-color px-5">
-	  <span class="navbar-brand mb-0 h1"><i class="fas fa-home"></i></span>
-	  <c:if test="${not empty user}">
+	  <a class="main-color navbar-brand mb-0 h1" href="/"><i class="fas fa-home"></i></a>
+	  <c:if test="${not empty currentUser}">
 		   <ul class="navbar-nav  ml-auto">
 			  <li class="nav-item">
-			  	<a class="nav-link main-color" href="/">${currentUser.username}</a>
+			  	<a class="nav-link main-color" href="/dashboard/${currentUser.id}">${currentUser.username}</a>
 			  </li>
 		      <li class="nav-item">
 		        <a class="nav-link main-color" href="/logout">Logout</a>
@@ -42,7 +42,7 @@
                <h6>${ currentUser.firstName } ${ currentUser.lastName }</h6>
               </div>
             <h5>Update:</h5>
-			<form:form action="/dashboard/user/edit" method="post" modelAttribute="currentUser">
+			<form:form action="/dashboard/${currentUser.id}/edit" method="post" modelAttribute="currentUser">
 				<div class="row">
 	                <div class="form-group col-6">
 						<label class="col-form-label">First Name:</label>

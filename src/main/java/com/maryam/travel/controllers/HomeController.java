@@ -26,7 +26,9 @@ public class HomeController {
 	private UserService uServ;
 	
     @GetMapping("/")
-    public String index() {
+    public String index( Model model, HttpSession session) {
+    	User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+    	model.addAttribute("currentUser", loggedInUser);
         return "index.jsp";
     }
     @GetMapping("/register")
@@ -63,12 +65,14 @@ public class HomeController {
 		return "redirect:/";
 	}
     @GetMapping("/dashboard/{user_id}")
-	public String user(@PathVariable("user_id") Long id, Model model){
+	public String user(@PathVariable("user_id") Long id, Model model, HttpSession session){
+    	User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
     	User theUser = uServ.findById(id);
 		if(theUser == null) {
 			return "redirect:/";
 		}
 		model.addAttribute("theUser", theUser);
+		model.addAttribute("currentUser", loggedInUser);
 		return "user.jsp";
 	}
     @GetMapping("/dashboard/user/edit")
@@ -80,14 +84,14 @@ public class HomeController {
 		model.addAttribute("currentUser", loggedInUser);
 		return "editUser.jsp";
 	}
-    @PostMapping("/dashboard/user/edit")
-	public String updateUser(@Valid @ModelAttribute("currentUser") EditUser currentUser, BindingResult result, HttpSession session, Model model) {
+    @PostMapping("/dashboard/{id}/edit")
+	public String updateUser(@Valid @ModelAttribute("currentUser") EditUser currentUser, @PathVariable("id") Long id, BindingResult result, HttpSession session, Model model) {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
 		if(result.hasErrors()) {
 			model.addAttribute("currentUser", loggedInUser);
 			return "editUser.jsp";
 		}
 		uServ.updateUser(currentUser,loggedInUser.getId());
-		return "redirect:/dashboard";
+		return "redirect:/dashboard/{id}";
 	}
 }

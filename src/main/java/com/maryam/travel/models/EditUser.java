@@ -21,7 +21,7 @@ public class EditUser {
 	@Lob // Large Object
 	@Column(name = "photo", columnDefinition = "BLOB")
 	private byte[] profileImg;
-	
+ 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE ) // Store only date not time
 	private java.util.Date birthday;
