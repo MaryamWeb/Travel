@@ -58,5 +58,8 @@ public class HomeController {
 		session.setAttribute("user_id", u.getId());
 		return "redirect:/";
 	}
-    
+    @GetMapping("/dashboard")
+	public String user(Model model){
+		return "user.jsp";
+	}
 }

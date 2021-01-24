@@ -33,7 +33,26 @@ a.link-text:hover{
 .login-right-container{
 	padding:100px 0;
 }
+
 /* ------------Register------------- */
 .register-right-container{
 	padding:50px 0;
 } 
+
+/* ------------Dashboard------------- */
+
+.avatar img {
+  display:block;
+  margin:auto;
+  object-fit: cover;
+  border-radius:50%;
+  width: 150px;
+  height: 150px;
+  box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+.dashboard-header{
+	border-bottom: 1px solid #e0e0e0
+}
+.aboutme{
+	text-align:justify;
+}
