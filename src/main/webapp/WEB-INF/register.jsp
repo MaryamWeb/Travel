@@ -29,36 +29,36 @@
 	      </ul>
       </c:if>
 	</nav>
-	<div class="container mt-5">
-		<div class="row d-flex justify-content-between">
-			<div class="col-6">
-				<form:form action="/register" method="post" modelAttribute="newUser">
-					<h3 class="main-color text-center">Register</h3>
-					<div class="form-group">
-						<label class="col-form-label">First Name:</label>
-						<form:input path="firstName" class="form-control" />
-						<form:errors path="firstName" class="text-danger" />
-					</div>
-					<div class="form-group">
-						<label class="col-form-label">Username:</label>
-						<form:input path="username" class="form-control" />
-						<form:errors path="username" class="text-danger" />
-					</div>
-					<div class="form-group">
-						<label class="col-form-label">Password:</label>
-						<form:password path="password" class="form-control" />
-						<form:errors path="password" class="text-danger" />
-					</div>
-					<div class="form-group">
-						<label class="col-form-label">Confirm:</label>
-						<form:password path="confirm" class="form-control" />
-						<form:errors path="confirm" class="text-danger" />
-					</div>
-					<input type='submit' value='Register'
-						class="btn main-bg-color btn-block text-white mt-4">
-				</form:form>
-			</div>
-		</div>
-	</div>
+	<div class="container bg-white mt-5">
+	    <div class="row no-gutter">
+	       <div class="col-md-8 d-none d-md-flex bg-image"></div>
+	       <div class="register-right-container col-md-4 d-flex align-items-center">
+	            <div class="col-lg-8 col-xl-8 mx-auto">
+	                <h3 class="display-4 text-center">REGISTER</h3> <br>
+	               <form:form action="/register" method="post" modelAttribute="newUser">
+	                    <div class="form-group mb-4"> 
+	                    	<form:input path="firstName" placeholder="First Name" class="form-control input-field shadow-sm px-4"/> 
+	                    	<form:errors path="firstName" class="text-danger" />
+	                    </div>
+	                    <div class="form-group mb-4"> 
+	                    	<form:input path="username" placeholder="Username" class="form-control input-field shadow-sm px-4"/> 
+	                    	<form:errors path="username" class="text-danger" />
+	                    </div>
+	                    <div class="form-group mb-4"> 
+	                    	<form:password path="password" placeholder="Password" class="form-control input-field shadow-sm px-4"/>  
+	                    	<form:errors path="password" class="text-danger" />
+	                    </div>
+	                    <div class="form-group mb-4"> 
+	                    	<form:password path="confirm" placeholder="Password" class="form-control input-field shadow-sm px-4"/>  
+	                    	<form:errors path="confirm" class="text-danger"/>
+	                    </div>
+	                    <input type='submit' value='Register' class="btn btn-block main-bg-color mb-3 input-field shadow-sm"/> 
+	                    <p>Already have an account? <a href="/login" class="link-text muted-color">Login</a></p>
+	                </form:form>
+	            </div>
+	       </div>
+	    </div>
+	</div> 
+
 </body>
 </html>
