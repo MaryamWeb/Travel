@@ -32,21 +32,21 @@
  <div class="container emp-profile bg-white pt-4">
       <div class="row">
           <div class="col-md-4 avatar">
-               <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1093&q=80" alt="Avatar"/>
+               <img src="${theUser.profileImg}" alt="Avatar"/>
           </div>
           <div class="col-md-8">
-              <input type="submit" class="btn main-bg-color float-right"  value="Edit Profile"/>
+              <a href="/dashboard/user/edit" class="btn main-bg-color float-right">Edit Profile</a>  
               <div class="dashboard-header">
-               <h5>Username</h5>
-               <h6>firstName lastName</h5>
-               <p class="mt-3">Trips : <span>3</span></p>
+               <h5>${theUser.username}</h5>
+               <h6>${theUser.firstName} ${theUser.lastName}</h5>
+               <p class="mt-3">Trips : <span>..</span></p>
               </div>
           </div>
       </div>
       <div class="row">
           <div class="col-md-4 mt-3">
-          	<p class="text-center mb-1">Lorem ipsum dolor sit amet</p>
-              <p class="aboutme">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+          	<p class="text-center mb-1">${theUser.tagLine}</p>
+              <p class="aboutme">${theUser.description}</p>
           </div>
           <div class="col-md-8">
 			<p>CONTENT</p>

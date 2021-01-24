@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,8 +32,9 @@ public class User {
 	private String tagLine;
 	private String description;
 
-	@Temporal(TemporalType.DATE) // Store only date not time
-	private Date birthday;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Temporal(TemporalType.DATE ) // Store only date not time
+	private java.util.Date birthday;
 
 	@Lob // Large Object
 	@Column(name = "photo", columnDefinition = "BLOB")
@@ -51,7 +52,7 @@ public class User {
 	private transient String birthdayng;
 
 	@Transient
-	@NotEmpty(message = "Confirm Password is required!")
+	//@NotEmpty(message = "Confirm Password is required!")
 	private String confirm;
 
 	@Column(updatable = false)

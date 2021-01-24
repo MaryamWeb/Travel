@@ -1,5 +1,6 @@
 package com.maryam.travel.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 
 import com.maryam.travel.models.LoginUser;
 import com.maryam.travel.models.User;
+import com.maryam.travel.models.EditUser;
 import com.maryam.travel.repositories.UserRepository;
 
 @Service
@@ -62,5 +64,19 @@ public class UserService {
 		} else {
 			return user;
 		}
+	}
+ 
+	public User updateUser(EditUser updatedUser, Long userId) {
+		  User u = userRepo.findById(userId).orElse(null);
+		  u.setFirstName(updatedUser.getFirstName());
+		  u.setLastName(updatedUser.getLastName());
+		  u.setTagLine(updatedUser.getTagLine());
+		  u.setDescription(updatedUser.getDescription());
+		  u.setBirthday(updatedUser.getBirthday());
+		  u.setProfileImg(updatedUser.getProfileImg());
+		  return userRepo.save(u);
+		}
+	public User findById(Long id) {
+		return this.userRepo.findById(id).orElse(null);
 	}
 }

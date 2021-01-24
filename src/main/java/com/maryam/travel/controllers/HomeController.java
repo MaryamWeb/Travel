@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.maryam.travel.services.UserService;
 import com.maryam.travel.models.LoginUser;
+import com.maryam.travel.models.EditUser;
 import com.maryam.travel.models.User;
 
 @Controller
@@ -61,8 +62,13 @@ public class HomeController {
 		session.setAttribute("user_id", u.getId());
 		return "redirect:/";
 	}
-    @GetMapping("/dashboard")
-	public String user(Model model){
+    @GetMapping("/dashboard/{user_id}")
+	public String user(@PathVariable("user_id") Long id, Model model){
+    	User theUser = uServ.findById(id);
+		if(theUser == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("theUser", theUser);
 		return "user.jsp";
 	}
     @GetMapping("/dashboard/user/edit")
@@ -75,13 +81,13 @@ public class HomeController {
 		return "editUser.jsp";
 	}
     @PostMapping("/dashboard/user/edit")
-	public String updateUser(@Valid @ModelAttribute("currentUser") User currentUser, BindingResult result, HttpSession session, Model model) {
+	public String updateUser(@Valid @ModelAttribute("currentUser") EditUser currentUser, BindingResult result, HttpSession session, Model model) {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
 		if(result.hasErrors()) {
 			model.addAttribute("currentUser", loggedInUser);
 			return "editUser.jsp";
 		}
-			//uServ.update(currentUser);
-			return "redirect:/dashboard";
+		uServ.updateUser(currentUser,loggedInUser.getId());
+		return "redirect:/dashboard";
 	}
 }
