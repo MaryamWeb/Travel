@@ -1,14 +1,46 @@
 package com.maryam.travel.controllers;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.maryam.travel.services.UserService;
+import com.maryam.travel.models.LoginUser;
+import com.maryam.travel.models.User;
 
 @Controller
 public class HomeController {
-
+	
+	@Autowired
+	private UserService uServ;
+	
     @GetMapping("/")
     public String index() {
         return "index.jsp";
     }
+    @GetMapping("/login")
+	public String login(Model model){
+    	model.addAttribute("newLogin", new LoginUser());
+    	model.addAttribute("newUser", new User());
+		return "login.jsp";
+	}
+    @PostMapping("/login")
+	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult result, Model model, HttpSession session) {
+		User u = uServ.login(newLogin, result);
+		if(result.hasErrors()) {
+			model.addAttribute("newUser", new User());
+			return "login.jsp";
+		}
+		session.setAttribute("user_id", u.getId());
+		return "redirect:/";
+		
+	}
 
 }
