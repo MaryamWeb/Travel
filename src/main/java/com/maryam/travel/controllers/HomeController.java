@@ -1,5 +1,7 @@
 package com.maryam.travel.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.maryam.travel.services.UserService;
@@ -61,5 +64,24 @@ public class HomeController {
     @GetMapping("/dashboard")
 	public String user(Model model){
 		return "user.jsp";
+	}
+    @GetMapping("/dashboard/user/edit")
+	public String editUser(HttpSession session, Model model) {
+		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("currentUser", loggedInUser);
+		return "editUser.jsp";
+	}
+    @PostMapping("/dashboard/user/edit")
+	public String updateUser(@Valid @ModelAttribute("currentUser") User currentUser, BindingResult result, HttpSession session, Model model) {
+		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+		if(result.hasErrors()) {
+			model.addAttribute("currentUser", loggedInUser);
+			return "editUser.jsp";
+		}
+			//uServ.update(currentUser);
+			return "redirect:/dashboard";
 	}
 }
