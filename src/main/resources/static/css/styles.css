@@ -1,0 +1,35 @@
+:root {
+	--primary-color: #EAB251;
+}
+body {
+	background-color:#F8F9FB; 
+}
+.main-color{
+	color:var(--primary-color);
+}
+.main-bg-color{
+	background-color:var(--primary-color);
+}
+.input-field{
+	border-radius:15px;
+	border:none;
+}
+.link-text{
+	font-style:italic;
+}
+a.link-text:hover{
+	font-style:italic;
+	color:var(--primary-color);
+}
+.muted-color{
+	color:#6c757d;
+}
+/* -------------Login-------------- */
+.bg-image {
+    background-image: url(../images/travelAuth.jfif);
+    background-size: cover;
+    background-position: center center
+}
+.login-right-container{
+	padding:100px 0;
+}

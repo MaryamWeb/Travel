@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -26,14 +29,26 @@ public class User {
 	private String firstName;
 
 	private String lastName;
+	private String tagLine;
+	private String description;
+
+	@Temporal(TemporalType.DATE) // Store only date not time
+	private Date birthday;
+
+	@Lob // Large Object
+	@Column(name = "photo", columnDefinition = "BLOB")
+	private byte[] profileImg;
 
 	@NotEmpty(message = "Username is required!")
-	@Column (unique=true) 
+	@Column(unique = true)
 	private String username;
 
 	@NotEmpty(message = "Password is required!")
 	@Size(min = 8, message = "Password must be at least 8 characters")
 	private String password;
+
+	@Transient
+	private transient String birthdayng;
 
 	@Transient
 	@NotEmpty(message = "Confirm Password is required!")
@@ -70,6 +85,38 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	public String getTagLine() {
+		return tagLine;
+	}
+
+	public void setTagLine(String tagLine) {
+		this.tagLine = tagLine;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public byte[] getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(byte[] profileImg) {
+		this.profileImg = profileImg;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -84,6 +131,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getBirthdayng() {
+		return birthdayng;
+	}
+
+	public void setBirthdayng(String birthdayng) {
+		this.birthdayng = birthdayng;
 	}
 
 	public String getConfirm() {

@@ -34,7 +34,7 @@
 	       <div class="col-md-8 d-none d-md-flex bg-image"></div>
 	       <div class="login-right-container col-md-4 d-flex align-items-center">
 	            <div class="col-lg-8 col-xl-8 mx-auto">
-	                <h3 class="display-4 text-center">LOGIN</h3> 
+	                <h3 class="display-4 text-center">LOGIN</h3> <br>
 	                <form>
 	                    <div class="form-group mb-4"> 
 	                    	<input type="email" placeholder="Username" class="form-control input-field shadow-sm px-4"> 
@@ -43,7 +43,7 @@
 	                    	<input id="inputPassword" type="password" placeholder="Password" class="form-control input-field shadow-sm px-4">  
 	                    </div>
 	                    <input type='submit' value='Register' class="btn btn-block main-bg-color mb-3 input-field shadow-sm"/> 
-	                    <p>OR <a href=" " class="link-text muted-color">Create An Account</a></p>
+	                    <p>OR <a href=" " class="link-text muted-color  ">Create An Account</a></p>
 	                </form>
 	            </div>
 	       </div>
