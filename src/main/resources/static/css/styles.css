@@ -14,6 +14,9 @@ body {
 .second-color{
 	color:var(--secondary-color);
 }
+.second-bg-color{
+	background-color:var(--secondary-color);
+}
 .input-field{
 	border-radius:15px;
 	border:none;
@@ -75,4 +78,20 @@ a.link-text:hover{
 }
 .trip-container{
 	padding:80px 0;
+}
+/* ------------All Trips------------- */
+.img-banner {
+	height: 50vh;
+	background: url('../images/plane.jfif') center center / cover no-repeat;
+}
+.img-banner h1 {
+	padding: 8% 0;
+	color: white;
+	font-size: 5vw;
+	font-family: "Berlin Sans FB Demi";
+	font-weight: bold;
+	text-transform: capitalize;
+}
+.list-no-bullets{
+	 list-style-type: none;
 }

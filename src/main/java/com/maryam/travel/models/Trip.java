@@ -135,5 +135,12 @@ public class Trip {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-
+	public Boolean isOnTrip(Long user_id) {
+		for(User u : users) {
+			if(u.getId() == user_id) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

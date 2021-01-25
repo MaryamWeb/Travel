@@ -98,6 +98,13 @@ public class HomeController {
 		uServ.updateUser(currentUser,loggedInUser.getId());
 		return "redirect:/dashboard/{id}";
 	}
+    @GetMapping("/trips")
+	public String home(HttpSession session, Model model) {
+    	User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+    	model.addAttribute("currentUser", loggedInUser);
+		model.addAttribute("allTrips", tServ.getTrips());
+		return "allTrips.jsp";
+	}
     @GetMapping("/trips/new")
 	public String newTrip(HttpSession session, Model model) {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
