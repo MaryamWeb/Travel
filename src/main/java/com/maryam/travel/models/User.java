@@ -13,6 +13,9 @@ import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -60,6 +63,14 @@ public class User {
 
 	@OneToMany(mappedBy="creator", fetch = FetchType.LAZY)
 	private List<Trip> plannedTrips;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "party", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "trip_id")
+    )
+	private List<Trip> trips;
 	
 	@Column(updatable = false)
 	private Date createdAt;
@@ -178,6 +189,14 @@ public class User {
 
 	public void setPlannedTrips(List<Trip> plannedTrips) {
 		this.plannedTrips = plannedTrips;
+	}
+
+	public List<Trip> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
 	}
 
 	@PrePersist
