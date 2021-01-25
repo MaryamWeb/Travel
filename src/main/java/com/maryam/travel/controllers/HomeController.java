@@ -129,5 +129,22 @@ public class HomeController {
 		tServ.createTrip(newTrip);
 		return "redirect:/";
 	}
-		
+    @GetMapping("/trip/{id}/join")
+	public String joinTrip(@PathVariable("id") Long id, HttpSession session) {
+		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		tServ.joinTrip(id, loggedInUser.getId());
+		return "redirect:/trips";
+	}
+    @GetMapping("/trip/{id}/unjoin")
+	public String leaveTrip(@PathVariable("id") Long id, HttpSession session) {
+		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		tServ.unjoinTrip(id, loggedInUser.getId());
+		return "redirect:/trips";
+	}	
 }

@@ -51,7 +51,13 @@
 	            </div>
 	            <div class="card-footer text-muted">
 	               Trip created on ${t.createdAt } 
-	               <a href="#" class="  main-color float-right">More</a> 
+	               <a href="#" class="main-color float-right ml-2">More</a> 
+						<c:if test="${!t.isOnTrip(currentUser.id)}">
+							<a href="/trip/${t.id}/join" class="main-color float-right">Join Trip</a>
+						</c:if>
+						<c:if test="${t.isOnTrip(currentUser.id)}">
+							<a href="/trip/${t.id}/unjoin" class="main-color float-right">UnJoin</a>
+						</c:if>
 	            </div>
 	          </div>
 			</c:forEach>

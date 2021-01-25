@@ -38,5 +38,13 @@ public class TripService {
 		t.setUsers(party);
 		tripRepo.save(t);
 	}
+	public void unjoinTrip(Long trip_id, Long user_id) {
+		User u = userRepo.findById(user_id).orElse(null);
+		Trip t = findTrip(trip_id);
+		List<User> party = t.getUsers();
+		party.remove(u);
+		t.setUsers(party);
+		tripRepo.save(t);
+	}
 	
 }
