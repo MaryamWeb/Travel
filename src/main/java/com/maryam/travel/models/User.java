@@ -1,15 +1,18 @@
 package com.maryam.travel.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,6 +58,9 @@ public class User {
 	//@NotEmpty(message = "Confirm Password is required!")
 	private String confirm;
 
+	@OneToMany(mappedBy="creator", fetch = FetchType.LAZY)
+	private List<Trip> plannedTrips;
+	
 	@Column(updatable = false)
 	private Date createdAt;
 	private Date updatedAt;
@@ -164,6 +170,14 @@ public class User {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public List<Trip> getPlannedTrips() {
+		return plannedTrips;
+	}
+
+	public void setPlannedTrips(List<Trip> plannedTrips) {
+		this.plannedTrips = plannedTrips;
 	}
 
 	@PrePersist
