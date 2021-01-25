@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -29,10 +30,12 @@ public class Trip {
 	@NotEmpty(message = "Please insert a country")
 	private String country;
 
+	@FutureOrPresent	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "Please insert the start date of your trip")
 	private Date start;
 
+	@FutureOrPresent
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "Please insert the end date of your trip")
 	private Date end;

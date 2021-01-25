@@ -77,7 +77,7 @@
 					<form:textarea path="description" class="form-control" />
 					<form:errors path="description" class="text-danger" />
 				</div>
-				<input type="submit" class="btn main-bg-color input-field shadow-sm float-right"  value="Edit Profile"/>
+				<input type="submit" class="btn main-bg-color float-right"  value="Edit Profile"/>
 		   </form:form>
           </div>
       </div>

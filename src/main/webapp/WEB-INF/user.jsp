@@ -29,31 +29,53 @@
 	      </ul>
       </c:if>
 	</nav>
- <div class="container emp-profile bg-white pt-4">
+ <div class="container bg-white py-4">
       <div class="row">
           <div class="col-md-4 avatar">
               <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1093&q=80" alt="Avatar"/>
-          </div>
-          <div class="col-md-8">
-          <c:if test="${currentUser.id == theUser.id}">
-			<a href="/dashboard/user/edit" class="btn main-bg-color float-right">Edit Profile</a> 
-		 </c:if>
-              <div class="dashboard-header">
-               <h5>${theUser.username}</h5>
-               <h6>${theUser.firstName} ${theUser.lastName}</h5>
-               <p class="mt-3">Trips : <span>..</span></p>
-              </div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-md-4 mt-3">
-          	<p class="text-center mb-1">${theUser.tagLine}</p>
+          	  <p class="text-center mb-1 mt-3">${theUser.tagLine}</p>
               <p class="aboutme">${theUser.description}</p>
           </div>
           <div class="col-md-8">
-			<p>CONTENT</p>
-          </div>
+	          <c:if test="${currentUser.id == theUser.id}">
+				<a href="/dashboard/user/edit" class="btn main-bg-color float-right">Edit Profile</a> 
+			 </c:if>
+              <div class="dashboard-header">
+	               <h5>${theUser.username}</h5>
+	               <h6>${theUser.firstName} ${theUser.lastName}</h6>
+	               <p class="mt-3">Trips : <span>..</span></p>
+              </div>
+			<div class="border-bottom pb-4 mt-3">
+				<h6>Upcoming trips:</h6>
+				<div class="row">
+				  <div class="col-sm-4">
+				    <div class="card user-trip-card">
+				      <div class="card-body p-2">
+				        <h5 class="card-title main-color">Spain</h5>
+				        <p class="card-text m-0"><span class="muted-color">Jan 12</span> - <span class="muted-color">Jan 30</span></p>
+				        <small class="muted-color">in 9 days</small> 
+				        <a href="#" class="link-text second-color float-right">Details</a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<div class="pt-4">
+				<h6>Past trips:</h6>
+				<div class="row">
+				  <div class="col-sm-4">
+				    <div class="card user-trip-card">
+				      <div class="card-body p-2">
+				        <h5 class="card-title main-color">Spain</h5>
+				        <p class="card-text m-0"><span class="muted-color">Jan 12</span> - <span class="muted-color">Jan 30</span></p>
+				        <a href="#" class="link-text second-color float-right">Details</a>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
       </div>
-  </div>
+ </div>
+</div>
 </body>
 </html>

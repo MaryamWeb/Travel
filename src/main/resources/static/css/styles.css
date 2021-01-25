@@ -1,5 +1,6 @@
 :root {
 	--primary-color: #EAB251;
+	--secondary-color: #573824;
 }
 body {
 	background-color:#F8F9FB; 
@@ -9,6 +10,9 @@ body {
 }
 .main-bg-color{
 	background-color:var(--primary-color);
+}
+.second-color{
+	color:var(--secondary-color);
 }
 .input-field{
 	border-radius:15px;
@@ -23,6 +27,9 @@ a.link-text:hover{
 }
 .muted-color{
 	color:#6c757d;
+}
+.border-bottom{
+	border-bottom: 1px solid #e0e0e0
 }
 /* -------------Login-------------- */
 .bg-image {
@@ -56,6 +63,10 @@ a.link-text:hover{
 .aboutme{
 	text-align:justify;
 }
+.user-trip-card{
+	border:1px solid var(--secondary-color);
+}
+
 /* ------------New Trip------------- */
 .bg-image-road {
     background-image: url(../images/road.jfif);
