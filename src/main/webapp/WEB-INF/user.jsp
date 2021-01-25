@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="now" class="java.util.Date"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,30 +49,47 @@
 			<div class="border-bottom pb-4 mt-3">
 				<h6>Upcoming trips:</h6>
 				<div class="row">
-				  <div class="col-sm-4">
-				    <div class="card user-trip-card">
-				      <div class="card-body p-2">
-				        <h5 class="card-title main-color">Spain</h5>
-				        <p class="card-text m-0"><span class="muted-color">Jan 12</span> - <span class="muted-color">Jan 30</span></p>
-				        <small class="muted-color">in 9 days</small> 
-				        <a href="#" class="link-text second-color float-right">Details</a>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-			</div>
+				<c:forEach items="${allTrips}" var="t">
+				<c:if test="${t.start gt now}">
+					<c:if test="${t.isOnTrip(theUser.id)}">
+			          <div class="col-sm-4">
+					    <div class="card user-trip-card">
+					      <div class="card-body p-2">
+					        <h5 class="card-title main-color">${t.country}</h5>
+					        <p class="card-text m-0">
+					        <p class="muted-color my-0">From: <fmt:formatDate value="${t.start}" pattern="MM/dd/yyyy" /></p>
+					        <p class="muted-color">To: <fmt:formatDate value="${t.end}" pattern="MM/dd/yyyy" /></p>
+					        <small class="muted-color">in ... days</small> 
+					        <a href="#" class="link-text second-color float-right">Details</a>
+					      </div>
+					    </div>
+					  </div>
+		          </c:if>
+		          </c:if>
+				</c:forEach>
+			   </div>
+		  </div>
 			<div class="pt-4">
 				<h6>Past trips:</h6>
 				<div class="row">
-				  <div class="col-sm-4">
-				    <div class="card user-trip-card">
-				      <div class="card-body p-2">
-				        <h5 class="card-title main-color">Spain</h5>
-				        <p class="card-text m-0"><span class="muted-color">Jan 12</span> - <span class="muted-color">Jan 30</span></p>
-				        <a href="#" class="link-text second-color float-right">Details</a>
-				      </div>
-				    </div>
-				  </div>
+				   <c:forEach items="${allTrips}" var="t">
+				<c:if test="${t.start lt now}">
+					<c:if test="${t.isOnTrip(theUser.id)}">
+			          <div class="col-sm-4">
+					    <div class="card user-trip-card">
+					      <div class="card-body p-2">
+					        <h5 class="card-title main-color">${t.country}</h5>
+					        <p class="card-text m-0">
+					        <p class="muted-color my-0">From: <fmt:formatDate value="${t.start}" pattern="MM/dd/yyyy" /></p>
+					        <p class="muted-color">To: <fmt:formatDate value="${t.end}" pattern="MM/dd/yyyy" /></p>
+					        <small class="muted-color">in ... days</small> 
+					        <a href="#" class="link-text second-color float-right">Details</a>
+					      </div>
+					    </div>
+					  </div>
+		          </c:if>
+		          </c:if>
+				</c:forEach>
 				</div>
 			</div>
       </div>

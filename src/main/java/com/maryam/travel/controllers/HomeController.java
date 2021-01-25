@@ -75,6 +75,7 @@ public class HomeController {
 		if(theUser == null) {
 			return "redirect:/";
 		}
+		model.addAttribute("allTrips", tServ.getTrips());
 		model.addAttribute("theUser", theUser);
 		model.addAttribute("currentUser", loggedInUser);
 		return "user.jsp";
