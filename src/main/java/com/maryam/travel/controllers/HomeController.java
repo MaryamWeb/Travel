@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.maryam.travel.services.TripService;
 import com.maryam.travel.services.UserService;
 import com.maryam.travel.models.LoginUser;
+import com.maryam.travel.models.Trip;
 import com.maryam.travel.models.EditUser;
 import com.maryam.travel.models.User;
 
@@ -24,6 +26,8 @@ public class HomeController {
 	
 	@Autowired
 	private UserService uServ;
+	@Autowired
+	private TripService tServ;
 	
     @GetMapping("/")
     public String index( Model model, HttpSession session) {
@@ -94,4 +98,29 @@ public class HomeController {
 		uServ.updateUser(currentUser,loggedInUser.getId());
 		return "redirect:/dashboard/{id}";
 	}
+    @GetMapping("/trips/new")
+	public String newTrip(HttpSession session, Model model) {
+		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("allTrips", tServ.getTrips());
+		model.addAttribute("newTrip", new Trip());
+		return "newTrip.jsp";
+	}
+    @PostMapping("/trips")
+	public String postTrip(@Valid @ModelAttribute("newTrip") Trip newTrip, BindingResult result, 
+			HttpSession session, Model model) {
+		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		if(result.hasErrors()) {
+			return "newTrip.jsp";
+		}
+		newTrip.setCreator(loggedInUser); //This is instead of using the hidden input
+		tServ.createTrip(newTrip);
+		return "redirect:/";
+	}
+		
 }
