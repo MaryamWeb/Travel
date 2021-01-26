@@ -30,6 +30,9 @@ public class TripService {
 	public Trip findTrip(Long id) {
 		return tripRepo.findById(id).orElse(null);
 	}
+	public List<Trip> searchByCountry(String query) {
+		return tripRepo.findByCountry(query);
+	}
 	public void joinTrip(Long trip_id, Long user_id) {
 		User u = userRepo.findById(user_id).orElse(null);
 		Trip t = findTrip(trip_id);

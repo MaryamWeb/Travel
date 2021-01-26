@@ -90,7 +90,9 @@ header .overlay {
     display: none;
   }
 }
-
+.btn-search{
+	border-radius:0 .25rem .25rem 0;
+}
 /* -------------Login-------------- */
 .bg-image {
     background-image: url(../images/travelAuth.jfif);

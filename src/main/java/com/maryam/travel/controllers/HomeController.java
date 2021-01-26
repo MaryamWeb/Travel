@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import com.maryam.travel.services.TripService;
 import com.maryam.travel.services.UserService;
 import com.maryam.travel.models.LoginUser;
@@ -147,5 +147,10 @@ public class HomeController {
 		}
 		tServ.unjoinTrip(id, loggedInUser.getId());
 		return "redirect:/trips";
-	}	
+	}
+    @GetMapping("/search")
+    public String searchResults(@RequestParam("q") String q, Model model) {
+    	model.addAttribute("countriesfound", tServ.searchByCountry(q));
+    	return "index.jsp";
+    }
 }
