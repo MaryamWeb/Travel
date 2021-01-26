@@ -32,35 +32,12 @@
 	     </c:if>
 	</nav> 
     <section class="img-banner d-flex align-items-center justify-content-center">
-      <h1>Trips</h1> 
+      <h1>${currentTrip.country }</h1> 
     </section>
     <div class="container mt-5">
       <div class="row">
         <div class="col-md-8">
-          <c:forEach items="${allTrips}" var="t">
-	          <div class="card mb-4">
-	            <div class="card-body">
-	              <h5 class="card-title text-center pb-2 main-color">${t.country}</h5>
-	              <ul class="card-text list-no-bullets">
-		              <li>Trip starts on  <span class="main-color"><fmt:formatDate value="${t.start}" pattern="E, dd MMM yyyy" /></span></li>
-		              <li>Ends on <span class="main-color"><fmt:formatDate value="${t.end}" pattern="E, dd MMM yyyy" /></span></li>
-		              <li>People joined the trip: <span class="main-color">${t.users.size()}</span></li>
-		              <li>Activities in the trip:<span class="main-color"> ... </span></li> 
-		              <li>Days till trip starts:<span class="main-color">..</span></li>
-	              </ul>
-	            </div>
-	            <div class="card-footer text-muted">
-	               Trip created on ${t.createdAt } 
-	               <a href="/trip/${t.id}" class="main-color float-right ml-2">More</a> 
-						<c:if test="${!t.isOnTrip(currentUser.id)}">
-							<a href="/trip/${t.id}/join" class="main-color float-right">Join Trip</a>
-						</c:if>
-						<c:if test="${t.isOnTrip(currentUser.id)}">
-							<a href="/trip/${t.id}/unjoin" class="main-color float-right">UnJoin</a>
-						</c:if>
-	            </div>
-	          </div>
-			</c:forEach>
+           
         </div>
  
  

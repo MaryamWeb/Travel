@@ -49,8 +49,8 @@
     <div class="d-flex h-100 text-center align-items-center">
       <div class="w-100 text-white">
         <h3 class="display-3">Welcome to trip planner</h3>
-        <p class="lead mb-0">Search for a trip by country</p>
-  	    <form action="/search" class="my-3">
+        <p class="lead mb-0">Search for a trip by country or <a href="/trips" class="link-text main-color">view all trips</a></p>
+  	    <form action="/search" method="post" class="my-3">
 	  	    <div class="input-group  col-4 mx-auto ">
 	           <input type="text" class="form-control" placeholder="Search" name="q">
 	           <span class="input-group-btn">

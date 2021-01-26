@@ -37,7 +37,10 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-md-8">
-          <c:forEach items="${allTrips}" var="t">
+        <c:if test="${resultCount ==0}">
+        <p>Sorry, looks like there are no trips for <span class="main-color">${searchItem}</span> You can <a href="/trips/new" class="main-color">Create the trip</a></p>
+        </c:if>
+          <c:forEach items="${countriesfound}" var="t">
 	          <div class="card mb-4">
 	            <div class="card-body">
 	              <h5 class="card-title text-center pb-2 main-color">${t.country}</h5>
@@ -51,7 +54,7 @@
 	            </div>
 	            <div class="card-footer text-muted">
 	               Trip created on ${t.createdAt } 
-	               <a href="/trip/${t.id}" class="main-color float-right ml-2">More</a> 
+	               <a href="/trip/${t.id}" class="main-color float-right mr-2">More</a> 
 						<c:if test="${!t.isOnTrip(currentUser.id)}">
 							<a href="/trip/${t.id}/join" class="main-color float-right">Join Trip</a>
 						</c:if>
@@ -62,8 +65,6 @@
 	          </div>
 			</c:forEach>
         </div>
- 
- 
         <div class="col-md-4">
 	  	    <form action="/search" method="post" class="my-3">
 		  	    <div class="input-group mb-2">

@@ -2,6 +2,7 @@ package com.maryam.travel.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -106,11 +107,21 @@ public class HomeController {
 		model.addAttribute("allTrips", tServ.getTrips());
 		return "allTrips.jsp";
 	}
+    @GetMapping("/trip/{trip_id}")
+	public String trip(@PathVariable("trip_id") Long id, Model model, HttpSession session) {
+		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+		if(loggedInUser == null) {
+			return "redirect:/";
+		}
+		Trip currentTrip = tServ.findTrip(id);
+		model.addAttribute("currentTrip", currentTrip);
+		return "trip.jsp";
+	}
     @GetMapping("/trips/new")
 	public String newTrip(HttpSession session, Model model) {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
 		if(loggedInUser == null) {
-			return "redirect:/";
+			return "redirect:/login";
 		}
 		model.addAttribute("allTrips", tServ.getTrips());
 		model.addAttribute("newTrip", new Trip());
@@ -148,9 +159,16 @@ public class HomeController {
 		tServ.unjoinTrip(id, loggedInUser.getId());
 		return "redirect:/trips";
 	}
-    @GetMapping("/search")
-    public String searchResults(@RequestParam("q") String q, Model model) {
+    
+    @PostMapping("/search")
+    public String searchResults(HttpServletRequest request , Model model,HttpSession session) {
+    	User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+    	String q = request.getParameter("q");
+    	model.addAttribute("currentUser", loggedInUser);
     	model.addAttribute("countriesfound", tServ.searchByCountry(q));
-    	return "index.jsp";
+        model.addAttribute("resultCount", tServ.searchByCountry(q).size());
+        model.addAttribute("searchItem", q);
+    	return "searchResult.jsp";
     }
+    
 }
