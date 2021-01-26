@@ -2,6 +2,9 @@
 	--primary-color: #EAB251;
 	--secondary-color: #573824;
 }
+html, body {
+  height: 100%;
+}
 body {
 	background-color:#F8F9FB; 
 }
@@ -34,6 +37,60 @@ a.link-text:hover{
 .border-bottom{
 	border-bottom: 1px solid #e0e0e0
 }
+/* ------------HomePage------------- */
+.home-nav{
+	background-color:transparent;
+	padding:5px 90px;
+	font-size: 1.2rem;
+}
+.home-nav .navbar-brand{
+	font-size: 1.5rem;
+}
+header {
+  position: relative;
+  background-color: #F8F9FB;
+  height: 100%;
+  width: 100%;
+  min-height: 35rem;
+  overflow: hidden;
+}
+header video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+header .container {
+  position: relative;
+  z-index: 2;
+}
+header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.6;
+  z-index: 1;
+}
+@media (pointer: coarse) and (hover: none) {
+  header {
+    background: url('../images/map.jfif') black no-repeat center center scroll;
+  }
+  header video {
+    display: none;
+  }
+}
+
 /* -------------Login-------------- */
 .bg-image {
     background-image: url(../images/travelAuth.jfif);
@@ -95,3 +152,4 @@ a.link-text:hover{
 .list-no-bullets{
 	 list-style-type: none;
 }
+
