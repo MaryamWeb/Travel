@@ -37,54 +37,26 @@
               <div class="dashboard-header">
 	               <h5>${theUser.username}</h5>
 	               <h6>${theUser.firstName} ${theUser.lastName}</h6>
-	               <p class="mt-3">Trips : <span>..</span></p>
+	               <p class="mt-3">Activites : <span>..</span></p>
               </div>
 			<div class="border-bottom pb-4 mt-3">
-				<h6>Upcoming trips:</h6>
-				<div class="row">
-				<c:forEach items="${allTrips}" var="t">
-				<c:if test="${t.start gt now}">
-					<c:if test="${t.isOnTrip(theUser.id)}">
-			          <div class="col-sm-4">
-					    <div class="card user-trip-card">
-					      <div class="card-body p-2">
-					        <h5 class="card-title main-color">${t.country}</h5>
-					        <p class="card-text m-0">
-					        <p class="muted-color my-0">From: <fmt:formatDate value="${t.start}" pattern="MM/dd/yyyy" /></p>
-					        <p class="muted-color">To: <fmt:formatDate value="${t.end}" pattern="MM/dd/yyyy" /></p>
-					        <small class="muted-color">in ... days</small> 
-					        <a href="/dashboard/${theUser.id}/${t.id}" class="link-text second-color float-right">Details</a>
-					      </div>
-					    </div>
-					  </div>
-		          </c:if>
-		          </c:if>
+			<h6 class="text-center mb-3">joined activities for trip <a href="/trip/${currentTrip.id}" class="main-color">${currentTrip.country }</a>:</h6>
+				<c:forEach items="${activities}" var="a">
+				<c:if test="${a.isOnActivity(theUser.id)}">
+					 <div class="border-bottom mt-3">
+						 <div class="row">
+						 	<p class="col-6 main-color">City:<span class="muted-color"> ${a.city}</span></p>
+		                    <p class="col-6 main-color">Place:<span class="muted-color"> ${a.place}</span></p>
+						 </div>
+						 <div class="row">
+						 	<p class="col-6 main-color">Start:<span class="muted-color"> ${a.start}</span></p>
+	                      	<p class="col-6 main-color">End:<span class="muted-color"> ${a.end}</span></p>
+						 </div>
+	                      <p class="main-color">Description:<span class="muted-color"> ${a.description}</span></p>
+	                  </div>
+	            </c:if>
 				</c:forEach>
-			   </div>
 		  </div>
-			<div class="pt-4">
-				<h6>Past trips:</h6>
-				<div class="row">
-				   <c:forEach items="${allTrips}" var="t">
-				<c:if test="${t.start lt now}">
-					<c:if test="${t.isOnTrip(theUser.id)}">
-			          <div class="col-sm-4">
-					    <div class="card user-trip-card">
-					      <div class="card-body p-2">
-					        <h5 class="card-title main-color">${t.country}</h5>
-					        <p class="card-text m-0">
-					        <p class="muted-color my-0">From: <fmt:formatDate value="${t.start}" pattern="MM/dd/yyyy" /></p>
-					        <p class="muted-color">To: <fmt:formatDate value="${t.end}" pattern="MM/dd/yyyy" /></p>
-					        <small class="muted-color">in ... days</small> 
-					        <a href="#" class="link-text second-color float-right">Details</a>
-					      </div>
-					    </div>
-					  </div>
-		          </c:if>
-		          </c:if>
-				</c:forEach>
-				</div>
-			</div>
       </div>
  </div>
 </div>

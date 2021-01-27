@@ -94,6 +94,23 @@ public class HomeController {
 		model.addAttribute("currentUser", loggedInUser);
 		return "user.jsp";
 	}
+    @GetMapping("/dashboard/{user_id}/{trip_id}")
+   	public String userActivities(@PathVariable("user_id") Long user_id, @PathVariable("trip_id") Long trip_id, Model model, HttpSession session){
+       	User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+       	Trip currentTrip = tServ.findTrip(trip_id);
+       	User theUser = uServ.findById(user_id);
+   		if(loggedInUser == null) {
+   			return "redirect:/";
+   		}
+   		if(currentTrip == null) {
+   			return "redirect:/";
+   		}
+   		model.addAttribute("currentTrip", currentTrip);
+   		model.addAttribute("theUser", theUser);
+   		model.addAttribute("currentUser", loggedInUser);
+   		model.addAttribute("activities", aServ.getActInTrip(trip_id));
+   		return "userActivities.jsp";
+   	}
     @GetMapping("/dashboard/user/edit")
 	public String editUser(HttpSession session, Model model) {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
@@ -224,7 +241,6 @@ public class HomeController {
    			return "redirect:/";
    		}
    		if(!currentTrip.isOnTrip(loggedInUser.getId())) {
-   			System.out.println("not on Trip");
    			return "redirect:/trip/{trip_id}";
    		}
    		aServ.joinActivity(activity_id, loggedInUser.getId());
