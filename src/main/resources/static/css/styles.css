@@ -159,3 +159,23 @@ header .overlay {
 .acticvity-container{
 	padding-bottom:50px;
 }
+.hover-show{
+	position:relative;
+	cursor: pointer;
+}
+.show {
+    display: none;
+    position:absolute;
+    left: 150px;
+    bottom: 20px;
+    z-index: 200;
+}
+.hover-show:hover > .show {
+	width:50vh;
+	height:auto;
+	overflow-wrap: break-word;
+	padding:10px;
+	background-color:white;
+	border:1px solid var(--secondary-color); 
+    display: block; 
+}

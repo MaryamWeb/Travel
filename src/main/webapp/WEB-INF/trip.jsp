@@ -79,7 +79,7 @@
 						<td><fmt:formatDate type="date" value="${ a.start }" /></td>
 						<td><fmt:formatDate type="date" value="${ a.end }" /></td>
 						 <c:choose>
-						   <c:when test="${fn:length(a.description) >= 50}"><td>${fn:substring(a.description, 0, 30)}...</td></c:when>
+						   <c:when test="${fn:length(a.description) >= 50}"><td class="hover-show">${fn:substring(a.description, 0, 30)}...<div class="show">${a.description }</div></td></c:when>
 						   <c:otherwise><td>${a.description}</td></c:otherwise>    
 						</c:choose>
 						<c:choose>
