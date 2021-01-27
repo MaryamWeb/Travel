@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,29 +17,12 @@
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg main-color px-5">
-	  <a class="main-color navbar-brand mb-0 h1" href="/"><i class="fas fa-home"></i></a>
-	  <c:if test="${not empty currentUser}">
-		   <ul class="navbar-nav  ml-auto">
-			  <li class="nav-item">
-			  	<a class="nav-link main-color" href="/ideas">${currentUser.username}</a>
-			  </li>
-		      <li class="nav-item">
-		        <a class="nav-link main-color" href="/logout">Logout</a>
-		      </li>
-	      </ul>
-      </c:if>
-      <c:if test="${empty currentUser}">
-		   <ul class="navbar-nav  ml-auto">
-			  <li class="nav-item">
-			  	<a class="nav-link main-color" href="/register">Signup</a>
-			  </li>
-		      <li class="nav-item">
-		        <a class="nav-link main-color" href="/login">Login</a>
-		      </li>
-	      </ul>
-      </c:if>
-	</nav>
+	<c:if test="${not empty currentUser}">
+	 	<jsp:include page="navLogged.jsp"/>
+	 </c:if>
+	 <c:if test="${empty currentUser}">
+	 	<jsp:include page="navNotLogged.jsp"/>
+	 </c:if>
 	<div class="container bg-white mt-5">
 	    <div class="row no-gutter">
 	       <div class="col-md-8 d-none d-md-flex bg-image"></div>

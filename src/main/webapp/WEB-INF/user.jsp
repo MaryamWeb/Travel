@@ -17,19 +17,12 @@
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg main-color px-5">
-	  <a class="main-color navbar-brand mb-0 h1" href="/"><i class="fas fa-home"></i></a>
-	  <c:if test="${not empty currentUser}">
-		   <ul class="navbar-nav  ml-auto">
-			  <li class="nav-item">
-			  	<a class="nav-link main-color" href="/dashboard/${currentUser.id}">${currentUser.username}</a>
-			  </li>
-		      <li class="nav-item">
-		        <a class="nav-link main-color" href="/logout">Logout</a>
-		      </li>
-	      </ul>
-      </c:if>
-	</nav>
+	<c:if test="${not empty currentUser}">
+	 	<jsp:include page="navLogged.jsp"/>
+	 </c:if>
+	 <c:if test="${empty currentUser}">
+	 	<jsp:include page="navNotLogged.jsp"/>
+	 </c:if>
  <div class="container bg-white py-4">
       <div class="row">
           <div class="col-md-4 avatar">
