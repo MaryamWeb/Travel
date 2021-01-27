@@ -64,6 +64,11 @@ public class HomeController {
     	model.addAttribute("newUser", new User());
 		return "login.jsp";
 	}
+    @GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("user_id");
+		return "redirect:/";
+	}
     @PostMapping("/login")
 	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult result, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		User u = uServ.login(newLogin, result);
@@ -130,6 +135,7 @@ public class HomeController {
 		if(loggedInUser == null) {
 			return "redirect:/login";
 		}
+		model.addAttribute("currentUser", loggedInUser);
 		model.addAttribute("allTrips", tServ.getTrips());
 		model.addAttribute("newTrip", new Trip());
 		return "newTrip.jsp";
