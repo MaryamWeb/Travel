@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -37,9 +37,34 @@
     <div class="container mt-5">
       <div class="row">
         <div class="col-md-8">
-           
+           <table class="table text-center table-bordered">
+		       <thead class="main-bg-color"> 
+		          <tr>
+		            <th>City</th>
+		            <th>Place</th>
+		            <th>Start at</th>
+		            <th>End at</th>
+		            <th>Description</th>
+		        </tr>
+		    </thead>
+			    <tbody>
+			        <c:forEach items="${ activities }" var="a">
+			        <c:if test="${a.trip.id == currentTrip.id}">
+					<tr>
+						<td>${ a.city }</td>
+						<td>${ a.place }</td>
+						<td><fmt:formatDate type="date" value="${ a.start }" /></td>
+						<td><fmt:formatDate type="date" value="${ a.end }" /></td>
+						 <c:choose>
+						   <c:when test="${fn:length(a.description) >= 50}"><td>${fn:substring(a.description, 0, 30)}...</td></c:when>
+						   <c:otherwise><td>${a.description}</td></c:otherwise>    
+						</c:choose>
+					<tr>
+					 </c:if>
+					</c:forEach>
+			    </tbody>
+			</table>
         </div>
- 
  
         <div class="col-md-4">
 	  	    <form action="/search" method="post" class="my-3">

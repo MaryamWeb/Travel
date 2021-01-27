@@ -1,7 +1,7 @@
 package com.maryam.travel.controllers;
 
 import java.util.List;
-
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -131,6 +131,7 @@ public class HomeController {
 			return "redirect:/";
 		}
 		Trip currentTrip = tServ.findTrip(id);
+		model.addAttribute("activities", aServ.getAct());
 		model.addAttribute("currentTrip", currentTrip);
 		return "trip.jsp";
 	}
