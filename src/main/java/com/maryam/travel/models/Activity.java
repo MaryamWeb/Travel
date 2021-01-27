@@ -33,6 +33,9 @@ public class Activity {
 
 	@NotEmpty(message = "Please insert a city")
 	private String city;
+	
+	@NotEmpty(message = "Please insert a place to visit")
+	private String place;
 
 	@FutureOrPresent
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -81,6 +84,14 @@ public class Activity {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	public Date getStart() {

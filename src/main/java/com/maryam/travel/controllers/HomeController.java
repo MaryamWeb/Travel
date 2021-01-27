@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.maryam.travel.services.ActivityService;
 import com.maryam.travel.services.TripService;
 import com.maryam.travel.services.UserService;
 import com.maryam.travel.models.LoginUser;
 import com.maryam.travel.models.Trip;
+import com.maryam.travel.models.Activity;
 import com.maryam.travel.models.EditUser;
 import com.maryam.travel.models.User;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,6 +32,8 @@ public class HomeController {
 	private UserService uServ;
 	@Autowired
 	private TripService tServ;
+	@Autowired
+	private ActivityService aServ;
 	
     @GetMapping("/")
     public String index( Model model, HttpSession session) {
@@ -183,5 +188,36 @@ public class HomeController {
         model.addAttribute("searchItem", q);
     	return "searchResult.jsp";
     }
+    @GetMapping("/trip/{trip_id}/activity")
+   	public String addActivity(@PathVariable("trip_id") Long id, Model model, HttpSession session) {
+   		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+   		if(loggedInUser == null) {
+   			return "redirect:/";
+   		}
+   		Trip currentTrip = tServ.findTrip(id);
+   		model.addAttribute("currentTrip", currentTrip);
+   		model.addAttribute("newActivity", new Activity());
+   		model.addAttribute("currentUser", loggedInUser);
+   		return "addActivity.jsp";
+   	}
+    @PostMapping("/trip/{trip_id}/activity")
+	public String postActivity(@Valid @ModelAttribute("newActivity") Activity newActivity, BindingResult result,  @PathVariable("trip_id") Long id, HttpSession session, Model model) {
+		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+		Trip currentTrip = tServ.findTrip(id);
+		if(loggedInUser == null) {
+			System.out.println("log");
+			return "redirect:/";
+		}
+		if(result.hasErrors()) {
+			System.out.println("HERE");
+			model.addAttribute("currentTrip", currentTrip);
+			model.addAttribute("currentUser", loggedInUser);
+			return "addActivity.jsp";
+		}
+		newActivity.setTrip(currentTrip);
+		newActivity.setCreator(loggedInUser);  
+		aServ.createAct(newActivity);
+		return "redirect:/trip/{trip_id}";
+	}
     
 }
