@@ -133,6 +133,7 @@ public class HomeController {
 		Trip currentTrip = tServ.findTrip(id);
 		model.addAttribute("activities", aServ.getAct());
 		model.addAttribute("currentTrip", currentTrip);
+		model.addAttribute("currentUser", loggedInUser);
 		return "trip.jsp";
 	}
     @GetMapping("/trips/new")
@@ -220,5 +221,35 @@ public class HomeController {
 		aServ.createAct(newActivity);
 		return "redirect:/trip/{trip_id}";
 	}
+    @GetMapping("/trip/{trip_id}/activity/{activity_id}/join")
+   	public String joinActivity(@PathVariable("activity_id") Long activity_id, @PathVariable("trip_id") Long trip_id,HttpSession session) {
+   		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+   		Trip currentTrip = tServ.findTrip(trip_id);
+   		if(loggedInUser == null) {
+   			return "redirect:/";
+   		}
+   		if(!currentTrip.isOnTrip(loggedInUser.getId())) {
+   			System.out.println("not on Trip");
+   			return "redirect:/trip/{trip_id}";
+   		}
+   		aServ.joinActivity(activity_id, loggedInUser.getId());
+   		
+   		return "redirect:/trip/{trip_id}";
+   	}
+    @GetMapping("/trip/{trip_id}/activity/{activity_id}/unjoin")
+   	public String unjoinActivity(@PathVariable("activity_id") Long activity_id, @PathVariable("trip_id") Long trip_id,HttpSession session) {
+   		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+   		Trip currentTrip = tServ.findTrip(trip_id);
+   		if(loggedInUser == null) {
+   			return "redirect:/";
+   		}
+   		if(!currentTrip.isOnTrip(loggedInUser.getId())) {
+   			System.out.println("not on Trip");
+   			return "redirect:/trip/{trip_id}";
+   		}
+   		aServ.unjoinActivity(activity_id, loggedInUser.getId());
+   		
+   		return "redirect:/trip/{trip_id}";
+   	}
     
 }

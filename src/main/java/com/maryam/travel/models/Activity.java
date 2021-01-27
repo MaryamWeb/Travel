@@ -1,6 +1,7 @@
 package com.maryam.travel.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -59,6 +62,14 @@ public class Activity {
 	@JoinColumn(name = "trip_id")
 	private Trip trip;
 
+	@ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "partyact", 
+        joinColumns = @JoinColumn(name = "activity_id"), 
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+	private List<User> users;
+	
 	public Activity() {
 	}
 
@@ -142,6 +153,14 @@ public class Activity {
 		this.trip = trip;
 	}
 
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
@@ -150,5 +169,13 @@ public class Activity {
 	@PreUpdate
 	protected void onUpdate() {
 		this.updatedAt = new Date();
+	}
+	public Boolean isOnActivity(Long user_id) {
+		for(User u : users) {
+			if(u.getId() == user_id) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
