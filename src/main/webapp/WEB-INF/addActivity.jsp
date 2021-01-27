@@ -26,7 +26,7 @@
  		<div class="row">
           <div class="col-md-4 trip-container">
            <div class="col-lg-10 col-xl-10 mx-auto">
-            <h5 class=" ">Create an activity for trip ${currentTrip.country}:</h5>
+            <h5 class=" ">Create an activity for trip <a href="/trip/${currentTrip.id}" class="main-color">${currentTrip.country}</a>:</h5>
 			<form:form action="/trip/${trip_id}/activity" method="post" modelAttribute="newActivity">
 	                <div class="form-group">
 	                <label class="col-form-label">City:</label>

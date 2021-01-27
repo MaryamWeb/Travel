@@ -55,6 +55,7 @@ public class Trip {
     )
 	private List<User> users;
 	
+	
 	@Column(updatable = false)
 	private Date createdAt;
 	private Date updatedAt;

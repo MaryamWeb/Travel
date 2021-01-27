@@ -41,7 +41,7 @@
              <li>Trip starts on  <span class="main-color"><fmt:formatDate value="${currentTrip.start}" pattern="E, dd MMM yyyy" /></span></li>
              <li>Ends on <span class="main-color"><fmt:formatDate value="${currentTrip.end}" pattern="E, dd MMM yyyy" /></span></li>
              <li>People joined the trip: <span class="main-color">${currentTrip.users.size()}</span></li>
-             <li>Activities in the trip:<span class="main-color"> ... </span></li> 
+             <li>Activities on the trip:<span class="main-color"> ${activities.size()} </span></li> 
              <li>Days till trip starts:<span class="main-color">..</span></li>
             </ul>
 		</div>
@@ -72,8 +72,7 @@
 		        </tr>
 		    </thead>
 			    <tbody>
-			        <c:forEach items="${ activities }" var="a">
-			        <c:if test="${a.trip.id == currentTrip.id}">
+			        <c:forEach items="${activities}" var="a">
 					<tr>
 						<td>${ a.city }</td>
 						<td>${ a.place }</td>
@@ -90,10 +89,10 @@
 						</c:choose>
 						<td>${a.users.size()}</td>
 					<tr>
-					 </c:if>
 					</c:forEach>
 			    </tbody>
 			</table>
+			 <p>Did not find the activity you were looking for? You can<span class="main-color">${searchItem}</span> <a href="/trip/${currentTrip.id}/activity" class="main-color">create it</a></p>
         </div>
     </div>
 </html>

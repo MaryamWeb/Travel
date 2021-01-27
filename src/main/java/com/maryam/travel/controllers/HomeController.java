@@ -1,7 +1,5 @@
 package com.maryam.travel.controllers;
 
-import java.util.List;
-import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.maryam.travel.services.ActivityService;
 import com.maryam.travel.services.TripService;
 import com.maryam.travel.services.UserService;
@@ -131,7 +127,7 @@ public class HomeController {
 			return "redirect:/";
 		}
 		Trip currentTrip = tServ.findTrip(id);
-		model.addAttribute("activities", aServ.getAct());
+		model.addAttribute("activities", aServ.getActInTrip(id));
 		model.addAttribute("currentTrip", currentTrip);
 		model.addAttribute("currentUser", loggedInUser);
 		return "trip.jsp";
@@ -211,7 +207,6 @@ public class HomeController {
 			return "redirect:/";
 		}
 		if(result.hasErrors()) {
-			System.out.println("HERE");
 			model.addAttribute("currentTrip", currentTrip);
 			model.addAttribute("currentUser", loggedInUser);
 			return "addActivity.jsp";

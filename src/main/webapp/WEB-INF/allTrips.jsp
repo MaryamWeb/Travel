@@ -45,7 +45,6 @@
 		              <li>Trip starts on  <span class="main-color"><fmt:formatDate value="${t.start}" pattern="E, dd MMM yyyy" /></span></li>
 		              <li>Ends on <span class="main-color"><fmt:formatDate value="${t.end}" pattern="E, dd MMM yyyy" /></span></li>
 		              <li>People joined the trip: <span class="main-color">${t.users.size()}</span></li>
-		              <li>Activities in the trip:<span class="main-color"> ... </span></li> 
 		              <li>Days till trip starts:<span class="main-color">..</span></li>
 	              </ul>
 	            </div>
