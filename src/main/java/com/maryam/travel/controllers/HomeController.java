@@ -21,7 +21,7 @@ import com.maryam.travel.models.LoginUser;
 import com.maryam.travel.models.Trip;
 import com.maryam.travel.models.EditUser;
 import com.maryam.travel.models.User;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class HomeController {
 	
@@ -37,37 +37,44 @@ public class HomeController {
         return "index.jsp";
     }
     @GetMapping("/register")
-	public String register(Model model){
+	public String register(Model model, HttpSession session){
+    	User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+    	model.addAttribute("currentUser", loggedInUser);
     	model.addAttribute("newLogin", new LoginUser());
     	model.addAttribute("newUser", new User());
 		return "register.jsp";
 	}
     @PostMapping("/register")
-	public String register(@Valid @ModelAttribute("newUser") User newUser, BindingResult result, Model model, HttpSession session) {
-		uServ.register(newUser, result);
+	public String register(@Valid @ModelAttribute("newUser") User newUser, BindingResult result, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+    	User u = uServ.register(newUser, result);
 		if(result.hasErrors()) {
 			model.addAttribute("newLogin", new LoginUser());
 			return "register.jsp";
 		} else {
 			session.setAttribute("user_id", newUser.getId());   
-			return "redirect:/";
+			redirectAttributes.addAttribute("id", u.getId());
+			return "redirect:/dashboard/{id}";
 		}
 	}
     @GetMapping("/login")
-	public String login(Model model){
+	public String login(Model model, HttpSession session){
+    	User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
+    	model.addAttribute("currentUser", loggedInUser);
     	model.addAttribute("newLogin", new LoginUser());
     	model.addAttribute("newUser", new User());
 		return "login.jsp";
 	}
     @PostMapping("/login")
-	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult result, Model model, HttpSession session) {
+	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult result, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		User u = uServ.login(newLogin, result);
 		if(result.hasErrors()) {
 			model.addAttribute("newUser", new User());
 			return "login.jsp";
 		}
+		System.out.println(u.getId());
 		session.setAttribute("user_id", u.getId());
-		return "redirect:/";
+		redirectAttributes.addAttribute("id", u.getId());
+		return "redirect:/dashboard/{id}";
 	}
     @GetMapping("/dashboard/{user_id}")
 	public String user(@PathVariable("user_id") Long id, Model model, HttpSession session){
