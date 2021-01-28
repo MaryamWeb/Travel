@@ -15,15 +15,14 @@
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.2/css/all.css">
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Kaushan+Script&display=swap" rel="stylesheet"> 
 </head>
 <body>
 	<c:if test="${not empty currentUser}">
 	 	<jsp:include page="navLogged.jsp"/>
 	 </c:if>
-	 <c:if test="${empty currentUser}">
-	 	<jsp:include page="navNotLogged.jsp"/>
-	 </c:if>
- <div class="container bg-white py-4">
+ <div class="container bg-white py-4 mt-3 box-shadow">
       <div class="row">
           <div class="col-md-4 avatar">
               <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1093&q=80" alt="Avatar"/>
@@ -35,9 +34,8 @@
 				<a href="/dashboard/user/edit" class="btn main-bg-color float-right">Edit Profile</a> 
 			 </c:if>
               <div class="dashboard-header">
-	               <h5>${theUser.username}</h5>
+	               <h5 class="main-color">${theUser.username}</h5>
 	               <h6>${theUser.firstName} ${theUser.lastName}</h6>
-	               <p class="mt-3">Trips : <span>..</span></p>
               </div>
 			<div class="border-bottom pb-4 mt-3">
 				<h6>Upcoming trips:</h6>

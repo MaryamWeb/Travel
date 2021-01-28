@@ -181,7 +181,7 @@ public class HomeController {
 			return "redirect:/";
 		}
 		tServ.joinTrip(id, loggedInUser.getId());
-		return "redirect:/trips";
+		return "redirect:/trip/{id}";
 	}
     @GetMapping("/trip/{id}/unjoin")
 	public String leaveTrip(@PathVariable("id") Long id, HttpSession session) {
@@ -190,7 +190,7 @@ public class HomeController {
 			return "redirect:/";
 		}
 		tServ.unjoinTrip(id, loggedInUser.getId());
-		return "redirect:/trips";
+		return "redirect:/trip/{id}";
 	}
     
     @PostMapping("/search")

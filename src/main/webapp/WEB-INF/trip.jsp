@@ -18,26 +18,33 @@
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg  fixed-top px-5">
-	  <a class="text-white navbar-brand mb-0 h1" href="/"><i class="fas fa-home"></i></a>
-	  <c:if test="${not empty currentUser}">
-		   <ul class="navbar-nav  ml-auto">
-			  <li class="nav-item">
-			  	<a class="nav-link text-white" href="/dashboard/${currentUser.id}">${currentUser.username}</a>
-			  </li>
-		      <li class="nav-item">
-		        <a class="nav-link text-white" href="/logout">Logout</a>
-		      </li>
-	      </ul>
-	     </c:if>
+<nav class="navbar navbar-expand-lg font-cursive fixed-top home-nav mt-2px-5">     
+	  <a class="wh-color hover-brown navbar-brand mb-0 h1" href="/"><i class="fas fa-home"></i></a>
+	   <ul class="navbar-nav  ml-auto">
+		  <li class="nav-item">
+		  	<a class="nav-link wh-color hover-brown" href="/dashboard/${currentUser.id}">${currentUser.username}</a>
+		  </li>
+	      <li class="nav-item">
+	        <a class="nav-link wh-color hover-brown" href="/logout">Logout</a>
+	      </li>
+      </ul>
 	</nav> 
+    <div>
+	<div class="overlay"></div>
     <section class="img-banner d-flex align-items-center justify-content-center">
-      <h1>${currentTrip.country }</h1> 
+      <h1 class="display-3 font-cursive text-white">${currentTrip.country}</h1> 
     </section>
+	</div>
     <div class="container acticvity-container mt-5">
-      <div class="row">
+      <div class="row mb-4">
 		<div class="col-md-8">
 		<ul class="card-text list-no-bullets">
+			<c:if test="${!currentTrip.isOnTrip(currentUser.id)}">
+				<li>Click <a href="/trip/${currentTrip.id}/join" class="main-color hover-brown">here</a> if you want to join the trip!!</li>
+			</c:if>
+			<c:if test="${currentTrip.isOnTrip(currentUser.id)}">
+				<li>Click <a href="/trip/${currentTrip.id}/unjoin" class="main-color hover-brown">here</a> if you want to unjoin the trip!!</li>
+			</c:if>
              <li>Trip starts on  <span class="main-color"><fmt:formatDate value="${currentTrip.start}" pattern="E, dd MMM yyyy" /></span></li>
              <li>Ends on <span class="main-color"><fmt:formatDate value="${currentTrip.end}" pattern="E, dd MMM yyyy" /></span></li>
              <li>People joined the trip: <span class="main-color">${currentTrip.users.size()}</span></li>
@@ -47,19 +54,21 @@
 		</div>
         <div class="col-md-4">
 	  	    <form action="/search" method="post" class="my-3">
-		  	    <div class="input-group mb-2">
+		  	    <div class="input-group mb-2 box-shadow">
 		           <input type="text" class="form-control" placeholder="Search by country" name="q">
 		           <span class="input-group-btn">
-		             <input type="submit" value="Search" class="btn main-bg-color btn-search"/> 
+		             <button type="submit" class="btn main-bg-color btn-search">
+					    <i class="fas fa-search text-white"></i>
+					</button>
 		           </span>
 		         </div>
-		         <a href="/trips" class="main-color">Get all trips</a>
+		         <a href="/trips" class="main-color hover-brown">Get all trips</a>
 	        </form>
   		</div>
  	</div>
  	 <div>
         <h5>Activities on trip to ${currentTrip.country }:</h5>
-           <table class="table text-center table-bordered">
+           <table class="table text-center table-bordered box-shadow">
 		       <thead class="main-bg-color"> 
 		          <tr>
 		            <th>City</th>
@@ -83,8 +92,9 @@
 						   <c:otherwise><td>${a.description}</td></c:otherwise>    
 						</c:choose>
 						<c:choose>
-						   <c:when test="${a.isOnActivity(currentUser.id)}"><td><a href="/trip/${currentTrip.id}/activity/${a.id}/unjoin">Unjoin</a></td></c:when>
-						    <c:when test="${!a.isOnActivity(currentUser.id)}"><td><a href="/trip/${currentTrip.id}/activity/${a.id}/join">join</a></td></c:when>  
+						   <c:when test="${!currentTrip.isOnTrip(currentUser.id)}"><td>...</td></c:when>
+						   <c:when test="${a.isOnActivity(currentUser.id)}"><td><a class="main-color hover-brown" href="/trip/${currentTrip.id}/activity/${a.id}/unjoin">Unjoin</a></td></c:when>
+						    <c:when test="${!a.isOnActivity(currentUser.id)}"><td><a class="main-color hover-brown" href="/trip/${currentTrip.id}/activity/${a.id}/join">join</a></td></c:when>  
 						   <c:otherwise><td>...</td></c:otherwise>    
 						</c:choose>
 						<td>${a.users.size()}</td>
@@ -92,7 +102,7 @@
 					</c:forEach>
 			    </tbody>
 			</table>
-			 <p>Did not find the activity you were looking for? You can<span class="main-color">${searchItem}</span> <a href="/trip/${currentTrip.id}/activity" class="main-color">create it</a></p>
+			 <p>Did not find the activity you were looking for? You can <a href="/trip/${currentTrip.id}/activity" class="main-color hover-brown">create it</a></p>
         </div>
     </div>
 </html>

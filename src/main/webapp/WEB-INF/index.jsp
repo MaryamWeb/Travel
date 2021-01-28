@@ -12,11 +12,15 @@
 	href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/css/styles.css">
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.2/css/all.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet"> 
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Kaushan+Script&display=swap" rel="stylesheet"> 
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg fixed-top home-nav">
+	<nav class="navbar navbar-expand-lg fixed-top home-nav font-cursive mt-2">
 	  <a class="text-white navbar-brand mb-0 h1" href="/"><i class="fas fa-home"></i></a>
 	  <c:if test="${not empty currentUser}">
 		   <ul class="navbar-nav  ml-auto">
@@ -48,13 +52,15 @@
   <div class="container h-100">
     <div class="d-flex h-100 text-center align-items-center">
       <div class="w-100 text-white">
-        <h3 class="display-3">Welcome to trip planner</h3>
+        <h3 class="display-3 font-cursive">Welcome to trip planner</h3>
         <p class="lead mb-0">Search for a trip by country or <a href="/trips" class="link-text main-color">view all trips</a></p>
   	    <form action="/search" method="post" class="my-3">
 	  	    <div class="input-group  col-4 mx-auto ">
 	           <input type="text" class="form-control" placeholder="Search" name="q">
 	           <span class="input-group-btn">
-	             <input type="submit" value="Search" class="btn main-bg-color btn-search"/> 
+	             <button type="submit" class="btn main-bg-color btn-search">
+				    <i class="fas fa-search text-white"></i>
+				</button>
 	           </span>
 	         </div>
         </form>

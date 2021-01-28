@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.2/css/all.css">
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda&family=Kaushan+Script&display=swap" rel="stylesheet"> 
 </head>
 <body>
 	<c:if test="${not empty currentUser}">
@@ -23,12 +25,12 @@
 	 <c:if test="${empty currentUser}">
 	 	<jsp:include page="navNotLogged.jsp"/>
 	 </c:if>
-	<div class="container bg-white mt-5">
+	<div class="container bg-white mt-3 box-shadow">
 	    <div class="row no-gutter">
 	       <div class="col-md-8 d-none d-md-flex bg-image"></div>
 	       <div class="register-right-container col-md-4 d-flex align-items-center">
 	            <div class="col-lg-8 col-xl-8 mx-auto">
-	                <h3 class="display-4 text-center">REGISTER</h3> <br>
+	                <h1 class="text-center mb-4">REGISTER</h1> 
 	               <form:form action="/register" method="post" modelAttribute="newUser">
 	                    <div class="form-group mb-4"> 
 	                    	<form:input path="firstName" placeholder="First Name" class="form-control input-field shadow-sm px-4"/> 

@@ -7,6 +7,9 @@ html, body {
 }
 body {
 	background-color:#F8F9FB; 
+	font-family: 'Bodoni Moda', serif;
+	font-size: 1.03rem;
+    color: var(--secondary-color);
 }
 .main-color{
 	color:var(--primary-color);
@@ -31,11 +34,26 @@ a.link-text:hover{
 	font-style:italic;
 	color:var(--primary-color);
 }
+a.hover-brown:hover{
+	color:var(--secondary-color);
+	text-decoration:none;
+}
 .muted-color{
 	color:#6c757d;
 }
+.wh-color{
+	color:white;
+}
 .border-bottom{
 	border-bottom: 1px solid #e0e0e0
+}
+.font-cursive{
+	font-family: 'Kaushan Script', cursive;
+}
+.box-shadow{
+	border-radius:20px;
+	-webkit-box-shadow: 0px 0px 27px -1px rgba(0,0,0,0.33); 
+	box-shadow: 0px 0px 27px -1px rgba(0,0,0,0.33);
 }
 /* ------------HomePage------------- */
 .home-nav{
@@ -72,7 +90,7 @@ header .container {
   position: relative;
   z-index: 2;
 }
-header .overlay {
+header .overlay{
   position: absolute;
   top: 0;
   left: 0;
@@ -97,7 +115,8 @@ header .overlay {
 .bg-image {
     background-image: url(../images/travelAuth.jfif);
     background-size: cover;
-    background-position: center center
+    background-position: center center;
+    border-radius:20px 0 0 20px;
 }
 .login-right-container{
 	padding:100px 0;
@@ -133,7 +152,8 @@ header .overlay {
 .bg-image-road {
     background-image: url(../images/road.jfif);
     background-size: cover;
-    background-position: center center
+    background-position: center center;
+     border-radius: 0 20px 20px 0;
 }
 .trip-container{
 	padding:80px 0;
@@ -146,10 +166,10 @@ header .overlay {
 .img-banner h1 {
 	padding: 8% 0;
 	color: white;
-	font-size: 5vw;
-	font-family: "Berlin Sans FB Demi";
+	font-size: 6vw;
 	font-weight: bold;
 	text-transform: capitalize;
+	z-index:1;
 }
 .list-no-bullets{
 	 list-style-type: none;
@@ -179,4 +199,31 @@ header .overlay {
 	border:1px solid var(--secondary-color); 
     display: block; 
 }
- 
+.table{
+	text-transform: capitalize;
+}
+ /* ------------Add Activity------------- */ 
+ .activity-container{
+ padding:40px 0;
+ }
+ .bg-image-hike {
+    background-image: url(../images/hike.jfif);
+    background-size: cover;
+    background-position: center center;
+     border-radius: 0 20px 20px 0;
+}
+ /* ------------plane banner------------- */ 
+div .container {
+  position: relative;
+  z-index: 2;
+}
+div .overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50vh;
+  width: 100%;
+  background-color: black;
+  opacity: 0.4;
+  z-index: 1;
+}

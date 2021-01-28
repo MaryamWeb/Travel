@@ -42,7 +42,7 @@ public class Activity {
 
 	@FutureOrPresent
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "Please insert a start date")
+	@NotNull(message = "Please insert a start date")   
 	private Date start;
 
 	@FutureOrPresent
