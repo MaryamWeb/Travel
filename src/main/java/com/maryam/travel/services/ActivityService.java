@@ -46,4 +46,7 @@ public class ActivityService {
 	public List<Activity> getActInTrip(Long id) {
 		return actRepo.travelAct(id);
 	}
+	public List<Activity> getUserActInTrip(Long id) {
+		return actRepo.userTravelAct(id);
+	}
 }

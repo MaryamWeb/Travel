@@ -167,12 +167,18 @@ public class HomeController {
 		if(loggedInUser == null) {
 			return "redirect:/";
 		}
+		if(newTrip.getStart() !=null && newTrip.getEnd() !=null && newTrip.getStart().after(newTrip.getEnd())){
+	          model.addAttribute("errOverlap", "The start date must be before the end date");
+	          return "newTrip.jsp";
+	     }else {
+	    	 model.addAttribute("errOverlap", "");
+	     }
 		if(result.hasErrors()) {
 			return "newTrip.jsp";
 		}
 		newTrip.setCreator(loggedInUser); //This is instead of using the hidden input
 		tServ.createTrip(newTrip);
-		return "redirect:/";
+		return "redirect:/trips";
 	}
     @GetMapping("/trip/{id}/join")
 	public String joinTrip(@PathVariable("id") Long id, HttpSession session) {
@@ -190,6 +196,7 @@ public class HomeController {
 			return "redirect:/";
 		}
 		tServ.unjoinTrip(id, loggedInUser.getId());
+		aServ.getUserActInTrip(loggedInUser.getId());
 		return "redirect:/trip/{id}";
 	}
     

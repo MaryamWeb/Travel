@@ -49,6 +49,7 @@
 						<label class="col-form-label">To:</label>
 						<form:input type="date" path="end" class="form-control shadow-sm" />
 						<form:errors path="end" class="text-danger" />
+						<span class="text-danger">${errOverlap }</span>
 					</div>
 					<div class="form-group">
 						<input type="submit" class="btn btn-block main-bg-color shadow-sm mt-5"  value="Add Trip"/>

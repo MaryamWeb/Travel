@@ -66,7 +66,7 @@
 					<div class="form-group">
 						<input type="submit" class="btn btn-block main-bg-color shadow-sm mt-5"  value="Add Activity"/>
 					</div>
-						<p>OR <a href="/trips" class="link-text muted-color">join</a> an already created trip!</p>
+						<p>Back to trip <a href="/trip/${trip_id}" class="link-text muted-color">${currentTrip.country}</a></p>
 		   </form:form>
 		   </div>
           </div>
