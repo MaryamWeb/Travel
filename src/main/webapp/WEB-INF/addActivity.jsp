@@ -63,6 +63,7 @@
 							<form:errors path="end" class="text-danger" />
 						</div>
 					</div>
+					<span class="text-danger">${errOverlap }</span>
 					<div class="form-group">
 						<input type="submit" class="btn btn-block main-bg-color shadow-sm mt-5"  value="Add Activity"/>
 					</div>

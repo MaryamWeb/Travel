@@ -227,9 +227,18 @@ public class HomeController {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
 		Trip currentTrip = tServ.findTrip(id);
 		if(loggedInUser == null) {
-			System.out.println("log");
 			return "redirect:/";
 		}
+		if(newActivity.getStart() !=null && newActivity.getEnd() !=null && newActivity.getStart().after(newActivity.getEnd())){
+			model.addAttribute("currentTrip", currentTrip);
+			model.addAttribute("currentUser", loggedInUser);
+	        model.addAttribute("errOverlap", "The start date must be before the end date");
+	        return "addActivity.jsp";
+	     }else {
+	    	 model.addAttribute("currentTrip", currentTrip);
+			 model.addAttribute("currentUser", loggedInUser);
+	    	 model.addAttribute("errOverlap", "");
+	     }
 		if(result.hasErrors()) {
 			model.addAttribute("currentTrip", currentTrip);
 			model.addAttribute("currentUser", loggedInUser);
