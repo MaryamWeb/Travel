@@ -1,5 +1,8 @@
 package com.maryam.travel.controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -21,6 +24,7 @@ import com.maryam.travel.models.Activity;
 import com.maryam.travel.models.EditUser;
 import com.maryam.travel.models.User;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 @Controller
 public class HomeController {
 	
@@ -216,7 +220,15 @@ public class HomeController {
    		if(loggedInUser == null) {
    			return "redirect:/";
    		}
+ 
    		Trip currentTrip = tServ.findTrip(id);
+   		//Set the calendar for activity time to be between the trip dates
+   		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+		String tripStart = dateFormat.format(currentTrip.getStart());
+		String tripEnd = dateFormat.format(currentTrip.getEnd());
+		model.addAttribute("tripStart", tripStart );
+		model.addAttribute("tripEnd", tripEnd );
+		//end calendar
    		model.addAttribute("currentTrip", currentTrip);
    		model.addAttribute("newActivity", new Activity());
    		model.addAttribute("currentUser", loggedInUser);
@@ -233,6 +245,13 @@ public class HomeController {
 			model.addAttribute("currentTrip", currentTrip);
 			model.addAttribute("currentUser", loggedInUser);
 	        model.addAttribute("errOverlap", "The start date must be before the end date");
+	      //Set the calendar for activity time to be between the trip dates
+	   		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+			String tripStart = dateFormat.format(currentTrip.getStart());
+			String tripEnd = dateFormat.format(currentTrip.getEnd());
+			model.addAttribute("tripStart", tripStart );
+			model.addAttribute("tripEnd", tripEnd );
+			//end calendar
 	        return "addActivity.jsp";
 	     }else {
 	    	 model.addAttribute("currentTrip", currentTrip);
@@ -242,6 +261,13 @@ public class HomeController {
 		if(result.hasErrors()) {
 			model.addAttribute("currentTrip", currentTrip);
 			model.addAttribute("currentUser", loggedInUser);
+			//Set the calendar for activity time to be between the trip dates
+	   		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+			String tripStart = dateFormat.format(currentTrip.getStart());
+			String tripEnd = dateFormat.format(currentTrip.getEnd());
+			model.addAttribute("tripStart", tripStart );
+			model.addAttribute("tripEnd", tripEnd );
+			//end calendar
 			return "addActivity.jsp";
 		}
 		newActivity.setTrip(currentTrip);

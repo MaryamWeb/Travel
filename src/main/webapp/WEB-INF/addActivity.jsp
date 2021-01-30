@@ -26,6 +26,7 @@
 	 </c:if>
  <div class="container bg-white box-shadow mt-3">
  		<div class="row">
+ 		${serverTime }
           <div class="col-md-6 activity-container">
 	         <div class="col-lg-10 col-xl-10 mx-auto text-center mb-3">
 	 			<h4>Create an activity for trip <a href="/trip/${currentTrip.id}" class="main-color hover-brown">${currentTrip.country}</a>:</h4>
@@ -54,12 +55,12 @@
 					<div class="row">
 						<div class="form-group col-6">
 							<label class="col-form-label">From:</label>
-							<form:input type="date" path="start" class="form-control"/>
+							<form:input type="date" path="start" min="${tripStart}" max="${tripEnd}" class="form-control"/>
 							<form:errors path="start" class="text-danger" />
 						</div>
 						<div class="form-group col-6">
 							<label class="col-form-label">To:</label>
-							<form:input type="date" path="end" class="form-control" />
+							<form:input type="date" path="end" min="${tripStart}" max="${tripEnd}" class="form-control" />
 							<form:errors path="end" class="text-danger" />
 						</div>
 					</div>
