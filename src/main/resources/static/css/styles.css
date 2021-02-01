@@ -179,18 +179,18 @@ header .overlay{
 .acticvity-container{
 	padding-bottom:50px;
 }
-.hover-show{
+.hover-show2{
 	position:relative;
 	cursor: pointer;
 }
-.show {
+.show2 {
     display: none;
     position:absolute;
     left: 150px;
     bottom: 20px;
     z-index: 200;
 }
-.hover-show:hover > .show {
+.hover-show2:hover > .show2 {
 	width:50vh;
 	height:auto;
 	overflow-wrap: break-word;
@@ -201,6 +201,9 @@ header .overlay{
 }
 .table{
 	text-transform: capitalize;
+}
+.modal-header, .modal-footer{
+	border:none;
 }
  /* ------------Add Activity------------- */ 
  .activity-container{

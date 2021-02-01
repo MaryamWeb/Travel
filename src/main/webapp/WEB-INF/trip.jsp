@@ -28,10 +28,10 @@
 		<div class="col-md-8">
 		<ul class="card-text list-no-bullets">
 			<c:if test="${!currentTrip.isOnTrip(currentUser.id)}">
-				<li>Click <a href="/trip/${currentTrip.id}/join" class="main-color hover-brown">here</a> if you want to join the trip!!</li>
+				<li>Click <a href="/trip/${currentTrip.id}/join" class="main-color hover-brown" data-toggle="modal" data-target="#joinTrip">here</a> if you want to join the trip!!</li>
 			</c:if>
 			<c:if test="${currentTrip.isOnTrip(currentUser.id)}">
-				<li>Click <a href="/trip/${currentTrip.id}/unjoin" class="main-color hover-brown">here</a> if you want to unjoin the trip!!</li>
+				<li>Click <a href="/trip/${currentTrip.id}/unjoin" class="main-color hover-brown" data-toggle="modal" data-target="#leaveTrip">here</a> if you want to unjoin the trip!!</li>
 			</c:if>
              <li>Trip starts on  <span class="main-color"><fmt:formatDate value="${currentTrip.start}" pattern="E, dd MMM yyyy" /></span></li>
              <li>Ends on <span class="main-color"><fmt:formatDate value="${currentTrip.end}" pattern="E, dd MMM yyyy" /></span></li>
@@ -42,6 +42,7 @@
 		</div>
         <jsp:include page="./includes/searchField.jsp"/>
  	</div>
+ 	<jsp:include page="./common/modals.jsp"/>
  	 <div>
         <h5>Activities on trip to ${currentTrip.country }:</h5>
            <table class="table text-center table-bordered box-shadow">
@@ -64,7 +65,7 @@
 						<td><fmt:formatDate type="date" value="${ a.start }" /></td>
 						<td><fmt:formatDate type="date" value="${ a.end }" /></td>
 						 <c:choose>
-						   <c:when test="${fn:length(a.description) >= 50}"><td class="hover-show">${fn:substring(a.description, 0, 30)}...<div class="show">${a.description }</div></td></c:when>
+						   <c:when test="${fn:length(a.description) >= 50}"><td class="hover-show2">${fn:substring(a.description, 0, 30)}...<div class="show2">${a.description }</div></td></c:when>
 						   <c:otherwise><td>${a.description}</td></c:otherwise>    
 						</c:choose>
 						<c:choose>
