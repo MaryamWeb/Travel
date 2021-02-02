@@ -9,9 +9,12 @@ import com.maryam.travel.models.Activity;
 
 @Repository
 public interface ActivityRepository extends CrudRepository<Activity, Long> {
-	@Query(value="SELECT * FROM activities Where trip_id = ?1", nativeQuery=true)
+	@Query(value="SELECT * FROM activities ORDER BY start", nativeQuery=true)
+	List<Activity> allActivities();
+	
+	@Query(value="SELECT * FROM activities Where trip_id = ?1 ORDER BY start", nativeQuery=true)
 	List<Activity> travelAct(Long id);
 	
-	@Query(value="SELECT * FROM activities Where user_id = ?1", nativeQuery=true)
+	@Query(value="SELECT * FROM activities Where user_id = ?1 ORDER BY start", nativeQuery=true)
 	List<Activity> userTravelAct(Long id);
 }

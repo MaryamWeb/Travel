@@ -22,7 +22,7 @@ public class ActivityService {
 	}
 
 	public ArrayList<Activity> getAct() {
-		return (ArrayList<Activity>) actRepo.findAll();
+		return (ArrayList<Activity>) actRepo.allActivities();
 	}
 	public Activity findActivity(Long id) {
 		return actRepo.findById(id).orElse(null);
