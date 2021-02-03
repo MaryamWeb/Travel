@@ -62,8 +62,10 @@
 					<tr>
 						<td>${ a.city }</td>
 						<td>${ a.place }</td>
-						<td><fmt:formatDate type="date" value="${ a.start }" /></td>
-						<td><fmt:formatDate type="date" value="${ a.end }" /></td>
+						<fmt:parseDate value="${ a.start }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+						<td><fmt:formatDate pattern="MM/dd HH:mm a" value="${ parsedDateTime }" /></td>
+		 				<fmt:parseDate value="${ a.end }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+						<td><fmt:formatDate pattern="MM/dd HH:mm a" value="${ parsedDateTime }" /></td>
 						 <c:choose>
 						   <c:when test="${fn:length(a.description) >= 50}"><td class="hover-show2">${fn:substring(a.description, 0, 30)}...<div class="show2">${a.description }</div></td></c:when>
 						   <c:otherwise><td>${a.description}</td></c:otherwise>    

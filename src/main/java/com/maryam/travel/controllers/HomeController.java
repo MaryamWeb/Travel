@@ -2,7 +2,6 @@ package com.maryam.travel.controllers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -148,6 +147,7 @@ public class HomeController {
 		if(loggedInUser == null) {
 			return "redirect:/";
 		}
+		
 		Trip currentTrip = tServ.findTrip(id);
 		model.addAttribute("activities", aServ.getActInTrip(id));
 		model.addAttribute("currentTrip", currentTrip);
@@ -242,7 +242,7 @@ public class HomeController {
 		if(loggedInUser == null) {
 			return "redirect:/";
 		}
-		if(newActivity.getStart() !=null && newActivity.getEnd() !=null && newActivity.getStart().after(newActivity.getEnd())){
+		if(newActivity.getStart() !=null && newActivity.getEnd() !=null && newActivity.getStart().isAfter(newActivity.getEnd())){
 			model.addAttribute("currentTrip", currentTrip);
 			model.addAttribute("currentUser", loggedInUser);
 	        model.addAttribute("errOverlap", "The start date must be before the end date");

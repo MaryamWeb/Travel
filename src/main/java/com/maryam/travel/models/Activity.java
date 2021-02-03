@@ -1,5 +1,6 @@
 package com.maryam.travel.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "activities")
@@ -39,16 +41,17 @@ public class Activity {
 	
 	@NotEmpty(message = "Please insert a place to visit")
 	private String place;
+ 
 
 	@FutureOrPresent
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(iso=ISO.DATE_TIME)
 	@NotNull(message = "Please insert a start date")   
-	private Date start;
+	private LocalDateTime start;
 
 	@FutureOrPresent
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(iso=ISO.DATE_TIME)
 	@NotNull(message = "Please insert an end date")
-	private Date end;
+	private LocalDateTime end;
 
 	@Column(updatable = false)
 	private Date createdAt;
@@ -105,19 +108,20 @@ public class Activity {
 		this.place = place;
 	}
 
-	public Date getStart() {
+	public LocalDateTime getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(LocalDateTime start) {
 		this.start = start;
 	}
 
-	public Date getEnd() {
+	
+	public LocalDateTime getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(LocalDateTime end) {
 		this.end = end;
 	}
 

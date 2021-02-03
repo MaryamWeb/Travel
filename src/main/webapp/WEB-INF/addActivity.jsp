@@ -42,12 +42,12 @@
 					<div class="row">
 						<div class="form-group col-6">
 							<label class="col-form-label">From:</label>
-							<form:input type="date" path="start" min="${tripStart}" max="${tripEnd}" class="form-control"/>
+							<form:input type="datetime-local" path="start" min="${tripStart}" max="${tripEnd}" class="form-control"/>
 							<form:errors path="start" class="text-danger" />
 						</div>
 						<div class="form-group col-6">
 							<label class="col-form-label">To:</label>
-							<form:input type="date" path="end" min="${tripStart}" max="${tripEnd}" class="form-control" />
+							<form:input type="datetime-local" path="end" min="${tripStart}" max="${tripEnd}" class="form-control" />
 							<form:errors path="end" class="text-danger" />
 						</div>
 					</div>
