@@ -34,8 +34,10 @@
 		                    <p class="col-6 main-color">Place:<span class="muted-color"> ${a.place}</span></p>
 						 </div>
 						 <div class="row">
-						 	<p class="col-6 main-color">Start: <span class="muted-color"><fmt:formatDate value="${a.start}" /></span></p>
-	                      	<p class="col-6 main-color">End: <span class="muted-color"><fmt:formatDate value="${a.start}"/></span></p>
+						 	<fmt:parseDate value="${ a.start }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
+						 	<p class="col-6 main-color">Start: <span class="muted-color"><fmt:formatDate pattern="MM/dd HH:mm a" value="${ parsedDateTime }" /> </span></p>
+	                      	<fmt:parseDate value="${ a.end }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime2" type="both"/>
+	                      	<p class="col-6 main-color">End: <span class="muted-color"><fmt:formatDate pattern="MM/dd HH:mm a" value="${ parsedDateTime2 }" /></span></p>
 						 </div>
 	                      <p class="main-color">Description:<span class="muted-color"> ${a.description}</span></p>
 	                  </div>
