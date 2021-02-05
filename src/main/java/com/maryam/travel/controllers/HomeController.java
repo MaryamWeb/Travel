@@ -1,6 +1,5 @@
 package com.maryam.travel.controllers;
 
-import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -214,6 +213,7 @@ public class HomeController {
 		}
 		 if(count == 0) {
 			 tServ.joinTrip(id, loggedInUser.getId());
+			 return "redirect:/trip/{id}";
 		 }else {
 			 model.addAttribute("count", count);
 			 model.addAttribute("activities", aServ.getActInTrip(id));
@@ -222,9 +222,7 @@ public class HomeController {
 		 }
 		 return "trip.jsp";
 	}
-    
-    //${request.getSession().removeAttribute("count")}
-    
+  
     @GetMapping("/trip/{id}/unjoin")
 	public String leaveTrip(@PathVariable("id") Long id, HttpSession session) {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );

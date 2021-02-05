@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.maryam.travel.models.Activity;
 import com.maryam.travel.models.Trip;
 import com.maryam.travel.models.User;
 import com.maryam.travel.repositories.TripRepository;
