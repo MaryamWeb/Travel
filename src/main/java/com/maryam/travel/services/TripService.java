@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.maryam.travel.models.Activity;
 import com.maryam.travel.models.Trip;
 import com.maryam.travel.models.User;
 import com.maryam.travel.repositories.TripRepository;
@@ -48,5 +49,7 @@ public class TripService {
 		t.setUsers(party);
 		tripRepo.save(t);
 	}
-	
+	public List<Object[]> getUserTrips(Long id) {
+		return tripRepo.isOverlap(id);
+	}
 }

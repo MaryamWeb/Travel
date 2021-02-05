@@ -24,6 +24,14 @@
     </section>
 	</div>
     <div class="container acticvity-container mt-5">
+     <c:if test="${count > 0}">
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		    You can't join this trip, it overlaps a trip that you are already in
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+		  </button>
+		</div>
+	</c:if>
       <div class="row mb-4">
 		<div class="col-md-8">
 		<ul class="card-text list-no-bullets">

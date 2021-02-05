@@ -1,7 +1,10 @@
 package com.maryam.travel.controllers;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -186,14 +189,42 @@ public class HomeController {
 		return "redirect:/trips";
 	}
     @GetMapping("/trip/{id}/join")
-	public String joinTrip(@PathVariable("id") Long id, HttpSession session) {
+	public String joinTrip(@PathVariable("id") Long id, HttpSession session ,Model model,HttpServletRequest request) {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
 		if(loggedInUser == null) {
 			return "redirect:/";
 		}
-		tServ.joinTrip(id, loggedInUser.getId());
-		return "redirect:/trip/{id}";
+		Trip currentTrip = tServ.findTrip(id);
+		List<Object[]> userTrips= tServ.getUserTrips(loggedInUser.getId());
+		int count=0;
+		Boolean checkStart;
+		Boolean checkEnd;
+		 for(Object[] u : userTrips) {
+			 Object userId = u[0];
+			 Object tripId = u[1];
+			 Object start = u[2];
+			 Object end = u[3];
+			 
+			 checkStart=((Date) start).compareTo(currentTrip.getStart()) ==1 || ((Date) start).compareTo(currentTrip.getEnd()) ==-1;
+			 checkEnd=((Date) end).compareTo(currentTrip.getStart()) ==-1 || ((Date) end).compareTo(currentTrip.getEnd()) ==1;
+			 
+			 if(checkStart == false || checkEnd == false) {
+				 count++;
+			 }
+		}
+		 if(count == 0) {
+			 tServ.joinTrip(id, loggedInUser.getId());
+		 }else {
+			 model.addAttribute("count", count);
+			 model.addAttribute("activities", aServ.getActInTrip(id));
+			 model.addAttribute("currentTrip", currentTrip);
+			 model.addAttribute("currentUser", loggedInUser);
+		 }
+		 return "trip.jsp";
 	}
+    
+    //${request.getSession().removeAttribute("count")}
+    
     @GetMapping("/trip/{id}/unjoin")
 	public String leaveTrip(@PathVariable("id") Long id, HttpSession session) {
 		User loggedInUser = uServ.findOne( (Long) session.getAttribute("user_id") );
